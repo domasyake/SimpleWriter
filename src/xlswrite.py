@@ -18,6 +18,7 @@ class XlsWriter:
             sheet.cell(1, i + 1).value = elements[i]
 
     def add_raw(self, elements):
+        self.__workbook = px.load_workbook('data.xlsx')
         sheet = self.__workbook.active
         write_row = sheet.max_row + 1
         for i in range(len(elements)):
