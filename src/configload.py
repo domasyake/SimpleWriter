@@ -6,7 +6,11 @@ class ConfigLoader:
             self.data = f.read()
 
         self.data = self.data.split(",")
-        self.data.remove("")
+        while True:
+            try:
+                self.data.remove("")
+            except ValueError:
+                break
 
         for item in self.data:
             print(item)
