@@ -1,5 +1,3 @@
-
-
 class ConfigLoader:
     def __init__(self):
         with open("config.txt", "r") as f:
@@ -13,4 +11,4 @@ class ConfigLoader:
                 break
 
         for item in self.data:
-            print(item)
+            print("load field -  " + item)

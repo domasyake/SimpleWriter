@@ -1,8 +1,8 @@
-class WidgedManager:
+class WidgetManager:
     def __init__(self):
-        self.__elements=[]
+        self.__elements = []
 
-    def set_elemetnts(self, elements):
+    def set_elements(self, elements):
         self.__elements = elements
 
     def get_elements_parameter(self):

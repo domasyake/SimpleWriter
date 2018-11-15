@@ -5,7 +5,7 @@ class XlsWriter:
     def __init__(self, elements):
         try:
             self.__workbook = px.load_workbook('data.xlsx')
-        except:
+        except FileNotFoundError:
             self.__workbook = px.Workbook()
             self.sheet_init(elements)
             self.__workbook.save('data.xlsx')

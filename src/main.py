@@ -1,10 +1,9 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 from widgetmanage import *
-from widgetcreate import *
+from widgetcreators import *
 from configload import *
 from xlswrite import *
-from stringutil import StringProcessor as sp
 
 if __name__ == '__main__':
     root = tk.Tk()
@@ -17,17 +16,17 @@ if __name__ == '__main__':
     button_frame.pack(fill="x")
 
     config_loader = ConfigLoader()
-    widget_creater = WidgetCreater(elements_frame)
-    widget_manager = WidgedManager()
-    widget_manager.set_elemetnts(widget_creater.create_elements(config_loader.data))
-    xls_writer=XlsWriter([sp.split_combobox_name(item) for item in config_loader.data])
+    widget_creator = WidgetCreatorRoot(elements_frame)
+    widget_manager = WidgetManager()
+    widget_manager.set_elements(widget_creator.create_elements(config_loader.data))
+    xls_writer = XlsWriter(widget_creator.get_all_label_name())
 
-
+    # event on submit
     def button1_clicked():
         print(widget_manager.get_elements_parameter())
         xls_writer.add_raw(widget_manager.get_elements_parameter())
         widget_manager.clear_elements()
-        widget_manager.set_elemetnts(widget_creater.re_create(config_loader.data))
+        widget_manager.set_elements(widget_creator.re_create(config_loader.data))
 
     button1 = ttk.Button(
         button_frame,
