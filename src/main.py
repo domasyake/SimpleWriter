@@ -16,14 +16,13 @@ if __name__ == '__main__':
     button_frame.pack(fill="x")
 
     config_loader = ConfigLoader()
-    widget_creator = WidgetCreatorRoot(elements_frame)
+    widget_creator = WidgetCreatorControl(elements_frame)
     widget_manager = WidgetManager()
     widget_manager.set_elements(widget_creator.create_elements(config_loader.data))
     xls_writer = XlsWriter(widget_creator.get_all_label_name())
 
     # event on submit
     def button1_clicked():
-        print(widget_manager.get_elements_parameter())
         xls_writer.add_raw(widget_manager.get_elements_parameter())
         widget_manager.clear_elements()
         widget_manager.set_elements(widget_creator.re_create(config_loader.data))

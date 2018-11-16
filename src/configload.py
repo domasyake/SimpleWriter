@@ -11,4 +11,4 @@ class ConfigLoader:
                 break
 
         for item in self.data:
-            print("load field -  " + item)
+            print("load data -  " + item)

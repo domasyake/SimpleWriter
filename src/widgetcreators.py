@@ -2,11 +2,12 @@ import tkinter as tk
 import tkinter.ttk as ttk
 
 
-class WidgetCreatorRoot:
+class WidgetCreatorControl:
     def __init__(self, frame):
         self.__my_frame = frame
-        # SimpleBoxCreator must be at the end of the list
-        self.__my_creators = [PullDownCreator(frame), SimpleBoxCreator(frame)]
+        # List to put in except SimpleField
+        self.__my_creators = [PullDownCreator(frame)]
+        self.__simple_creator = SimpleBoxCreator(frame)
         self.__element_names = list()
 
     def get_all_label_name(self):
@@ -16,7 +17,12 @@ class WidgetCreatorRoot:
         elements = []
         for i in range(len(data)):
             name = data[i]
-            creator = next(filter(lambda x: x.check_my_pattern(name), self.__my_creators))
+            creator_temp_list = list(filter(lambda x: x.check_my_pattern(name), self.__my_creators))
+            # If it does not match the special field pattern, create SimpleBox
+            if len(creator_temp_list) == 0:
+                creator = self.__simple_creator
+            else:
+                creator = creator_temp_list[0]
             label_name = creator.get_name(name)
             self.create_label(label_name, i)
             elements.append(creator.create_widget(name, i))
@@ -27,7 +33,11 @@ class WidgetCreatorRoot:
         elements = []
         for i in range(len(data)):
             name = data[i]
-            creator = next(filter(lambda x: x.check_my_pattern(name), self.__my_creators))
+            creator_temp_list = list(filter(lambda x: x.check_my_pattern(name), self.__my_creators))
+            if len(creator_temp_list) == 0:
+                creator = self.__simple_creator
+            else:
+                creator = creator_temp_list[0]
             elements.append(creator.create_widget(name, i))
         return elements
 
